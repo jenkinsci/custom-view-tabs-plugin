@@ -36,14 +36,23 @@ public class JobStatusCount {
     private int unstable = 0;
     private int successful = 0;
 
+    @SuppressWarnings("rawtypes")
     public JobStatusCount(Collection<TopLevelItem> items) {
+
+        if (items == null) {
+            return;
+        }
 
         total = items.size();
 
         for (TopLevelItem item : items) {
 
-            @SuppressWarnings("rawtypes")
-            Iterator<? extends Job> iterator = item.getAllJobs().iterator();
+            Collection<? extends Job> allJobs = item.getAllJobs();
+            if ((allJobs == null) || allJobs.isEmpty()) {
+                return;
+            }
+
+            Iterator<? extends Job> iterator = allJobs.iterator();
 
             if (iterator.hasNext()) {
                 countJobStatus(iterator.next());

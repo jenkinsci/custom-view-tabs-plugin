@@ -209,4 +209,37 @@ public class TabColours {
 
         return colour;
     }
+
+    public void setTabColourDefault(String tabColourDefault) {
+        this.tabColourDefault = tabColourDefault;
+    }
+
+    public void setTabColourDisabled(String tabColourDisabled) {
+        this.tabColourDisabled = tabColourDisabled;
+    }
+
+    public void setTabColourUnstable(String tabColourUnstable) {
+        this.tabColourUnstable = tabColourUnstable;
+    }
+
+    public void setTabColourFailed(String tabColourFailed) {
+        this.tabColourFailed = tabColourFailed;
+    }
+
+    public void setTabColourCustom1(String tabColourCustom1) {
+        this.tabColourCustom1 = tabColourCustom1;
+    }
+
+    public void setTabColourCustom2(String tabColourCustom2) {
+        this.tabColourCustom2 = tabColourCustom2;
+    }
+
+    public void setTabColourCustom3(String tabColourCustom3) {
+        this.tabColourCustom3 = tabColourCustom3;
+    }
+
+    public void setTabColourCustom4(String tabColourCustom4) {
+        this.tabColourCustom4 = tabColourCustom4;
+    }
+
 }

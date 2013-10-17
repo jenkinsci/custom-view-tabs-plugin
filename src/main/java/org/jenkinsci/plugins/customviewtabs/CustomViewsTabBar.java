@@ -15,26 +15,11 @@
  */
 package org.jenkinsci.plugins.customviewtabs;
 
-import static org.jenkinsci.plugins.customviewtabs.LabelPatterns.DISABLED;
-import static org.jenkinsci.plugins.customviewtabs.LabelPatterns.FAILED;
-import static org.jenkinsci.plugins.customviewtabs.LabelPatterns.NAME;
-import static org.jenkinsci.plugins.customviewtabs.LabelPatterns.REGEXNAME;
-import static org.jenkinsci.plugins.customviewtabs.LabelPatterns.SHORTNAME;
-import static org.jenkinsci.plugins.customviewtabs.LabelPatterns.SUCCESSFUL;
-import static org.jenkinsci.plugins.customviewtabs.LabelPatterns.TOTAL;
-import static org.jenkinsci.plugins.customviewtabs.LabelPatterns.UNSTABLE;
 import hudson.Extension;
-import hudson.model.TopLevelItem;
 import hudson.model.View;
-import hudson.plugins.nested_view.NestedView;
 import hudson.util.ListBoxModel;
 import hudson.views.ViewsTabBar;
 import hudson.views.ViewsTabBarDescriptor;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-
 import net.sf.json.JSONObject;
 
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -48,6 +33,8 @@ import org.kohsuke.stapler.StaplerRequest;
  */
 public class CustomViewsTabBar extends ViewsTabBar {
 
+    ViewItemExtractor extractor = new ViewItemExtractor();
+
     @DataBoundConstructor
     public CustomViewsTabBar() {
         super();
@@ -60,107 +47,39 @@ public class CustomViewsTabBar extends ViewsTabBar {
 
     public TabDisplayMetaData getTabData(View v) {
 
-        JobStatusCount jobCount = new JobStatusCount(getItemsInView(v));
+        JobStatusCount jobCount = new JobStatusCount(extractor.getItemsInView(v));
 
         return new TabDisplayMetaData(labelsFor(v, jobCount), colourFor(jobCount));
     }
 
-    private Collection<TopLevelItem> getItemsInView(View v) {
-        return allItems(Collections.singleton(v), new ArrayList<TopLevelItem>());
-    }
-
-    private Collection<TopLevelItem> allItems(Collection<View> views, Collection<TopLevelItem> items) {
-
-        for (View v : views) {
-
-            if (v instanceof NestedView) {
-                allItems(((NestedView) v).getViews(), items);
-            }
-            else {
-                items.addAll(v.getItems());
-            }
-        }
-
-        return items;
-    }
-
     private TabLabels labelsFor(View v, JobStatusCount jobCount) {
-        return new TabLabels(jobCount, v);
+
+        TabLabels tabLabels = new TabLabels(jobCount, v.getDisplayName());
+
+        CustomViewsTabBarDescriptor d = getDescriptor();
+
+        tabLabels.setConditionActiveTab(d.getConditionActiveTab());
+        tabLabels.setConditionInactiveTab(d.getConditionInactiveTab());
+
+        tabLabels.setPatternActiveTab(d.getPatternActiveTab());
+        tabLabels.setPatternInactiveTab(d.getPatternInactiveTab());
+
+        tabLabels.setLabelGenerator(
+                new StringReplacementLabelGenerator(
+                        d.getNameRegexMatch(), d.getNameRegexReplacement(), d.getShortNameLength()));
+
+        return tabLabels;
     }
 
     private String colourFor(JobStatusCount jobCount) {
         return getDescriptor().getTabColours().getColourFor(jobCount);
     }
 
-    class TabLabels {
-
-        private JobStatusCount jobCount;
-        private String displayName;
-
-        TabLabels(JobStatusCount jobCount, View v) {
-            this.jobCount = jobCount;
-            displayName = v.getDisplayName();
-        }
-
-        public String active() {
-
-            if (getDescriptor().getConditionActiveTab() && jobCount.allOk()) {
-                return displayName;
-            } else {
-                return getLabel(displayName, jobCount, getDescriptor().getPatternActiveTab());
-            }
-        }
-
-        public String inactive() {
-
-            if (getDescriptor().getConditionInactiveTab() && jobCount.allOk()) {
-                return displayName;
-            } else {
-                return getLabel(displayName, jobCount, getDescriptor().getPatternInactiveTab());
-            }
-        }
-
-        private String getLabel(String name, JobStatusCount jobCount, String pattern) {
-
-            String label = pattern.replaceAll(NAME, name);
-            label = label.replaceAll(SHORTNAME, shorten(name));
-            label = label.replaceAll(REGEXNAME, getRegexName(name));
-            label = label.replaceAll(TOTAL, with(jobCount.total()));
-            label = label.replaceAll(FAILED, with(jobCount.failed()));
-            label = label.replaceAll(DISABLED, with(jobCount.disabled()));
-            label = label.replaceAll(UNSTABLE, with(jobCount.unstable()));
-            label = label.replaceAll(SUCCESSFUL, with(jobCount.successful()));
-
-            return label;
-        }
-
-        private String with(int i) {
-            return Integer.toString(i);
-        }
-
-        private String getRegexName(String displayName) {
-            return displayName.replaceAll(
-                    getDescriptor().getNameRegexMatch(), getDescriptor().getNameRegexReplacement());
-        }
-
-        private String shorten(String displayName) {
-
-            int shortNameLength = getDescriptor().getShortNameLength();
-
-            if (displayName.length() > shortNameLength) {
-                return displayName.substring(0, shortNameLength) + ".";
-            }
-            else {
-                return displayName;
-            }
-        }
-    }
-
     @Extension
     public static final class CustomViewsTabBarDescriptor extends ViewsTabBarDescriptor {
 
         private String patternActiveTab = "$N1";
-        private String patternInactiveTab = "$N2";
+        private String patternInactiveTab = "$N1";
 
         private boolean conditionActiveTab = false;
         private boolean conditionInactiveTab = false;

@@ -15,7 +15,6 @@
  */
 package org.jenkinsci.plugins.customviewtabs;
 
-import org.jenkinsci.plugins.customviewtabs.CustomViewsTabBar.TabLabels;
 
 /**
  * Metadata for tab display customisation accounting for different states.
