@@ -49,7 +49,7 @@ public class JobStatusCount {
 
             Collection<? extends Job> allJobs = item.getAllJobs();
             if ((allJobs == null) || allJobs.isEmpty()) {
-                return;
+                continue;
             }
 
             Iterator<? extends Job> iterator = allJobs.iterator();

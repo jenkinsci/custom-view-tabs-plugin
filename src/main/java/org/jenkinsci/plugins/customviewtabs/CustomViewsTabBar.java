@@ -33,7 +33,7 @@ import org.kohsuke.stapler.StaplerRequest;
  */
 public class CustomViewsTabBar extends ViewsTabBar {
 
-    ViewItemExtractor extractor = new ViewItemExtractor();
+    private ViewItemExtractor extractor = new ViewItemExtractor();
 
     @DataBoundConstructor
     public CustomViewsTabBar() {
