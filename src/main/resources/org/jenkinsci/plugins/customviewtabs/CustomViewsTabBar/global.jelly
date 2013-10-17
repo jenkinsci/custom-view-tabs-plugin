@@ -1,0 +1,94 @@
+<!--
+Copyright 2012-2013 Alistair Todd
+ 
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<?jelly escape-by-default='true'?>
+
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler"
+	xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson"
+	xmlns:f="/lib/form">
+
+	<f:section title="Custom View Tabs">
+
+		<f:entry field="patternActiveTab" title="Active Tab Label Pattern">
+			<f:textbox />
+		</f:entry>
+
+		<f:entry field="conditionActiveTab" title="Only label active tab when unsuccessful jobs exist">
+			<f:checkbox />
+		</f:entry>
+
+		<f:entry field="patternInactiveTab" title="Inactive Tab Label Pattern">
+			<f:textbox />
+		</f:entry>
+
+		<f:entry field="conditionInactiveTab" title="Only label inactive tabs when unsuccessful jobs exist">
+			<f:checkbox />
+		</f:entry>
+		
+
+
+ 		<f:advanced title="Tab Colour Options">
+			<f:entry field="tabColourDefault" title="Tab colour: Default">
+				<f:select />
+			</f:entry>
+		
+			<f:entry field="tabColourDisabled" title="Tab colour: When disabled jobs">
+				<f:select />
+			</f:entry>
+		
+			<f:entry field="tabColourUnstable" title="Tab colour: When unstable jobs">
+				<f:select />
+			</f:entry>
+		
+			<f:entry field="tabColourFailed" title="Tab colour: When failed jobs">
+				<f:select />
+			</f:entry>
+				
+			<f:entry field="tabColourCustom1" title="Custom tab colour 1">
+				<f:textbox />
+			</f:entry>
+				
+			<f:entry field="tabColourCustom2" title="Custom tab colour 2">
+				<f:textbox />
+			</f:entry>
+				
+			<f:entry field="tabColourCustom3" title="Custom tab colour 3">
+				<f:textbox />
+			</f:entry>
+				
+			<f:entry field="tabColourCustom4" title="Custom tab colour 4">
+				<f:textbox />
+			</f:entry>
+		</f:advanced>
+
+
+  		<f:advanced title="Tab Name Adjustment Options">
+			<f:entry field="shortNameLength" title="Short name length">
+				<f:textbox />
+			</f:entry>
+		
+			<f:entry field="nameRegexMatch" title="Name regex match pattern">
+				<f:textbox />
+			</f:entry>
+		
+			<f:entry field="nameRegexReplacement" title="Name regex replacement">
+				<f:textbox />
+			</f:entry>
+		</f:advanced>
+
+
+	</f:section>
+
+</j:jelly>

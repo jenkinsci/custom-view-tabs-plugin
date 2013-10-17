@@ -1,0 +1,31 @@
+<div>
+	Set the labelpattern to use for tabs that are inactive.<br>
+	    The label pattern may include any text and any of the following special identifiers that will be replaced with the current value:
+    <ul>
+	    <li>$N1 - The original view name
+	    <li>$N2 - The original view name truncated according to the short name length setting
+	    <li>$N3 - The original view name processed using replaceAll(regexMatch, regexReplacement) see elsewhere
+	    <li>$T - The Total number of jobs
+	    <li>$S - The number of jobs currently Succeeding
+	    <li>$F - The number of jobs currently Failing
+	    <li>$U - The number of jobs currently Unstable
+	    <li>$D - The number of jobs currently Disabled
+    </ul>
+    For example, set the Inactive tab pattern to 
+    <ul>
+	    <li><strong>$N2: $S/$T</strong>
+	</ul>
+	to show something like
+	<ul>
+	    <li><strong>All: 2/4</strong>
+	</ul>   
+    Or set the Active tab pattern to
+    <ul>
+	    <li><strong>$N: $S OK, $F Broken, $U Dodgy</strong>
+	</ul>
+	to show something like
+	<ul>
+	    <li><strong>AllTheJobs: 2 OK, 1 Broken, 1 Dodgy</strong>
+	</ul>
+		Note that it's really up to you not to break it by using invalid characters that disrupt the HTML. Stick to regular text and you'll be fine.
+</div>

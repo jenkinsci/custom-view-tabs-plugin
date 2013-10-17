@@ -1,0 +1,13 @@
+.svn
+.project
+.classpath
+.settings
+target
+*.patch
+.idea/
+*.iml
+*.ipr
+*.iws
+sys$command
+work
+screenshots

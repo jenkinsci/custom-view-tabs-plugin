@@ -1,0 +1,10 @@
+<div>
+	Specify the regex matcher to use for the $N3 view name replacement eg (\w)\w*|\s to select initial letters.<br>
+	The view name is processed with replaceAll(regexMatch, regexReplacement).<br>
+	Only need one backslash for escaping special characters.<br>
+	<br>
+	eg with '(\w)\w*|\s' and '$1', the initial letters will be kept<br>
+	eg 'All The Jobs We Have' will be shortened to ATJWH<br>
+	which is quite a neat way of shortening tab names when you have lots of tabs and use a consistent naming convention.<br>
+	Alternatively, choose to only use the status information label patterns when there are unsuccessful jobs.
+</div>
