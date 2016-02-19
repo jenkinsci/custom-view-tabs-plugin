@@ -7,7 +7,7 @@
  </parent>
 
  <artifactId>custom-view-tabs</artifactId>
- <version>1.3</version>
+ <version>1.4-SNAPSHOT</version>
  <packaging>hpi</packaging>
  <name>Custom View Tabs Plugin</name>
  <description>Allows custom labels and colours on view tabs</description>
@@ -34,7 +34,7 @@
   <connection>scm:git:ssh://github.com/jenkinsci/custom-view-tabs-plugin.git</connection>
   <developerConnection>scm:git:ssh://git@github.com/jenkinsci/custom-view-tabs-plugin.git</developerConnection>
   <url>https://github.com/jenkinsci/custom-view-tabs-plugin</url>
-   <tag>custom-view-tabs-1.3</tag>
+   <tag>HEAD</tag>
   </scm>
 
  <repositories>
