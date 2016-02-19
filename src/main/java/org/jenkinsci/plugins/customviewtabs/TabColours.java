@@ -23,7 +23,7 @@ import net.sf.json.JSONObject;
  * Subset of the descriptor to handle tab colour settings. Ugly. When I understand how to properly
  * work with all this Jelly stuff, I'm sure I can make this much neater.
  * 
- * @author Alistair Todd <ringracer@gmail.com>
+ * @author Alistair Todd ringracer@gmail.com
  */
 public class TabColours {
 

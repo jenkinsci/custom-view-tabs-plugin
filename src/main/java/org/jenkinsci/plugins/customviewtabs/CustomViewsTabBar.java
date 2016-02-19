@@ -29,7 +29,7 @@ import org.kohsuke.stapler.StaplerRequest;
  * Given a View, count the number of jobs in the view by status and generate a label and a colour
  * for the tab accordingly.
  * 
- * @author Alistair Todd <ringracer@gmail.com>
+ * @author Alistair Todd ringracer@gmail.com
  */
 public class CustomViewsTabBar extends ViewsTabBar {
 

@@ -26,7 +26,7 @@ import java.util.Iterator;
  * must be a more direct way to determine the status of a job than by looking at the icon colour.
  * Anyone?
  * 
- * @author Alistair Todd <ringracer@gmail.com>
+ * @author Alistair Todd ringracer@gmail.com
  */
 public class JobStatusCount {
 

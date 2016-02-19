@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 /**
  * Just a bunch of regex patterns for the labels.
  * 
- * @author Alistair Todd <ringracer@gmail.com>
+ * @author Alistair Todd ringracer@gmail.com
  */
 public abstract class LabelPatterns {
 

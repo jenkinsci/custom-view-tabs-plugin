@@ -15,11 +15,10 @@
  */
 package org.jenkinsci.plugins.customviewtabs;
 
-
 /**
  * Metadata for tab display customisation accounting for different states.
  * 
- * @author Alistair Todd <ringracer@gmail.com>
+ * @author Alistair Todd ringracer@gmail.com
  */
 public class TabDisplayMetaData {
 

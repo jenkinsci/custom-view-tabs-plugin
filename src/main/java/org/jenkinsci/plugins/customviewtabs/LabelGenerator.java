@@ -18,7 +18,7 @@ package org.jenkinsci.plugins.customviewtabs;
 /**
  * Methods for label generation.
  * 
- * @author Alistair Todd <ringracer@gmail.com>
+ * @author Alistair Todd ringracer@gmail.com
  */
 public interface LabelGenerator {
 

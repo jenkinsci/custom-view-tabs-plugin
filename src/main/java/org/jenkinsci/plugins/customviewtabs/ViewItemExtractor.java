@@ -26,7 +26,7 @@ import java.util.Collections;
 /**
  * Extract all items from views including nested views.
  * 
- * @author Alistair Todd <ringracer@gmail.com>
+ * @author Alistair Todd ringracer@gmail.com
  */
 public class ViewItemExtractor {
 

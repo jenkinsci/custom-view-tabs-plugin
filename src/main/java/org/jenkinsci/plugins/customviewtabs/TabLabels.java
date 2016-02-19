@@ -18,7 +18,7 @@ package org.jenkinsci.plugins.customviewtabs;
 /**
  * Generation of tab labels according to job status details and label pattern configuration.
  * 
- * @author Alistair Todd <ringracer@gmail.com>
+ * @author Alistair Todd ringracer@gmail.com
  */
 public class TabLabels {
 

@@ -27,7 +27,7 @@ import static org.jenkinsci.plugins.customviewtabs.LabelPatterns.UNSTABLE;
 /**
  * Generate labels using simple string replacement in a crude, ugly and inefficient manner.
  * 
- * @author Alistair Todd <ringracer@gmail.com>
+ * @author Alistair Todd ringracer@gmail.com
  */
 public class StringReplacementLabelGenerator implements LabelGenerator {
 
