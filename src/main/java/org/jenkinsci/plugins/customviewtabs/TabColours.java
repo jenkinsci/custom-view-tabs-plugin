@@ -1,12 +1,12 @@
 /*
  * Copyright 2012-2013 Alistair Todd
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,10 +22,17 @@ import net.sf.json.JSONObject;
 /**
  * Subset of the descriptor to handle tab colour settings. Ugly. When I understand how to properly
  * work with all this Jelly stuff, I'm sure I can make this much neater.
- * 
+ *
  * @author Alistair Todd ringracer@gmail.com
  */
 public class TabColours {
+
+	private static final String NONE = "";
+	private static final String GREEN = "98fb98";
+	private static final String BLUE = "0000ff";
+	private static final String GREY = "cdc9c9";
+	private static final String YELLOW = "ffff00";
+	private static final String RED = "ff0000";
 
     private String tabColourDefault = "";
     private String tabColourDisabled = "";
@@ -39,7 +46,7 @@ public class TabColours {
 
     /**
      * Remember values received from config page.
-     * 
+     *
      * @param formData
      */
     public void configure(JSONObject formData) {
@@ -57,7 +64,7 @@ public class TabColours {
 
     /**
      * Supply options for config page drop down.
-     * 
+     *
      * @return
      */
     public ListBoxModel doFillTabColourDefaultItems() {
@@ -66,7 +73,7 @@ public class TabColours {
 
     /**
      * Supply options for config page drop down.
-     * 
+     *
      * @return
      */
     public ListBoxModel doFillTabColourDisabledItems() {
@@ -75,7 +82,7 @@ public class TabColours {
 
     /**
      * Supply options for config page drop down.
-     * 
+     *
      * @return
      */
     public ListBoxModel doFillTabColourUnstableItems() {
@@ -84,7 +91,7 @@ public class TabColours {
 
     /**
      * Supply options for config page drop down.
-     * 
+     *
      * @return
      */
     public ListBoxModel doFillTabColourFailedItems() {
@@ -93,32 +100,17 @@ public class TabColours {
 
     private ListBoxModel colourOptionsFor(String selectionColour) {
 
-        ListBoxModel options = withDefaultColourOptions();
+        Option noColourOption = new Option("None", NONE, NONE.equalsIgnoreCase(selectionColour));
+        Option greenColourOption = new Option("Green", GREEN, GREEN.equalsIgnoreCase(selectionColour));
+        Option blueColourOption = new Option("Blue", BLUE, BLUE.equalsIgnoreCase(selectionColour));
+        Option greyColourOption = new Option("Grey", GREY, GREY.equalsIgnoreCase(selectionColour));
+        Option yellowColourOption = new Option("Yellow", YELLOW, YELLOW.equalsIgnoreCase(selectionColour));
+        Option redColourOption = new Option("Red", RED, RED.equalsIgnoreCase(selectionColour));
 
-        for (Option o : options) {
-            if (o.value.equalsIgnoreCase(selectionColour)) {
-                o.selected = true;
-            } else {
-                o.selected = false;
-            }
-        }
-
-        return options;
-    }
-
-    private ListBoxModel withDefaultColourOptions() {
-
-        Option noColourOption = new Option("None", "", false);
-        Option greenColourOption = new Option("Green", "98fb98", false);
-        Option blueColourOption = new Option("Blue", "0000ff", false);
-        Option greyColourOption = new Option("Grey", "cdc9c9", false);
-        Option yellowColourOption = new Option("Yellow", "ffff00", false);
-        Option redColourOption = new Option("Red", "ff0000", false);
-
-        Option customColourOption1 = new Option("Custom1", "Custom1", false);
-        Option customColourOption2 = new Option("Custom2", "Custom2", false);
-        Option customColourOption3 = new Option("Custom3", "Custom3", false);
-        Option customColourOption4 = new Option("Custom4", "Custom4", false);
+        Option customColourOption1 = new Option("Custom1", "Custom1", tabColourCustom1.equalsIgnoreCase(selectionColour));
+        Option customColourOption2 = new Option("Custom2", "Custom2", tabColourCustom2.equalsIgnoreCase(selectionColour));
+        Option customColourOption3 = new Option("Custom3", "Custom3", tabColourCustom3.equalsIgnoreCase(selectionColour));
+        Option customColourOption4 = new Option("Custom4", "Custom4", tabColourCustom4.equalsIgnoreCase(selectionColour));
 
         return new ListBoxModel(
                 noColourOption,
@@ -136,7 +128,7 @@ public class TabColours {
     /**
      * Returns the appropriate colour setting for the supplied job status counts, in the correct
      * order or precedence.
-     * 
+     *
      * @param jobCounts
      *            Job status counts
      * @return colour as configured for the worst job status indicated by jobCounts
